@@ -27,16 +27,16 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void checkGetButton () {
-        final String t = "Hello from pravesh";
+
         onView(withId(R.id.getButton)).perform(click());
-        onView(withId(R.id.txtMsg)).check(matches(withText(t)));
+        onView(withId(R.id.txtMsg)).check(matches(isDisplayed()));
     }
 
     @Test
     public void checkPostButton () {
-        final String t = "Your username is pravesh";
-        onView(withId(R.id.postButton)).perform(typeText("Your name is pravesh"));
-        onView(withId(R.id.txtMsg)).check(matches(withText(t)));
+
+        onView(withId(R.id.postButton)).perform(click());
+        onView(withId(R.id.txtMsg)).check(matches(isDisplayed()));
     }
 
 }
