@@ -14,8 +14,6 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
 
     private TextView txt;
-    private Button get;
-    private Button post;
     private OkHttpClient client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,25 +21,40 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         client = new OkHttpClient();
         txt = findViewById(R.id.txtMsg);
-        get = findViewById(R.id.getButton);
+        Button get = findViewById(R.id.getButton);
         get.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getRequest();
+                getRequest("https://lamp.ms.wits.ac.za/mc/test.php");
             }
         });
-        post = findViewById(R.id.postButton);
+        Button post = findViewById(R.id.postButton);
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postRequest();
+                postRequest("https://lamp.ms.wits.ac.za/mc/test2.php");
+            }
+        });
+
+        Button getWrong = findViewById(R.id.getWrongButton);
+        getWrong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getRequest("https://lamp.ms.wits.ac.za/mc/testooo.php");
+            }
+        });
+        Button postWrong = findViewById(R.id.postWrongButton);
+        postWrong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                postRequest("https://lamp.ms.wits.ac.za/mc/test2dsafdsf.php");
             }
         });
 
     }
 
-    private void getRequest(){
-        Request request = new Request.Builder().url("https://lamp.ms.wits.ac.za/mc/test.php").build();
+    private void getRequest(String requestString){
+        Request request = new Request.Builder().url(requestString).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
@@ -56,26 +69,21 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        try {
 
                             if (!response.isSuccessful()){
                                 txt.setText("Connection failed " + response);
-                                throw new IOException("Connection failed " + response);
                             }
                             else {
                                 txt.setText(responseData);
                             }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                     }
                 });
             }
         });
     }
 
-    private void postRequest(){
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/mc/test2.php").newBuilder();
+    private void postRequest(String postString){
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(postString).newBuilder();
         urlBuilder.addQueryParameter("username","pravesh");
         String url = urlBuilder.build().toString();
         Request request = new Request.Builder().url(url).build();
@@ -93,18 +101,12 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        try {
-
                             if (!response.isSuccessful()){
                                 txt.setText("Connection failed " + response);
-                                throw new IOException("Connection failed " + response);
                             }
                             else {
                                 txt.setText(responseData);
                             }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                     }
                 });
             }

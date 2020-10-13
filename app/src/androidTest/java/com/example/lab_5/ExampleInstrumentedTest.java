@@ -19,6 +19,7 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withResourceName;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.*;
 
 /**
@@ -51,6 +52,23 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.postButton)).perform(click());
         Thread.sleep(1500);
         onView(withId(R.id.txtMsg)).check(matches(withText(R.string.postText)));
+    }
+
+    @Test
+    public void checkGetWrongButton () throws InterruptedException {
+
+        Thread.sleep(500);
+        onView(withId(R.id.getWrongButton)).perform(click());
+        Thread.sleep(1500);
+        onView(withId(R.id.txtMsg)).check(matches(not(withText(R.string.getText))));
+    }
+
+    @Test
+    public void checkPostWrongButton () throws InterruptedException {
+
+        onView(withId(R.id.postWrongButton)).perform(click());
+        Thread.sleep(1500);
+        onView(withId(R.id.txtMsg)).check(matches(not(withText(R.string.postText))));
     }
 
 }

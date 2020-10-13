@@ -24,7 +24,6 @@
         android:layout_marginBottom="150dp"
         android:text="@string/getButton"
         app:layout_constraintBottom_toTopOf="@+id/postButton"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMsg"
@@ -37,8 +36,28 @@
         android:layout_marginBottom="150dp"
         android:text="@string/postButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/getWrongButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:layout_marginBottom="150dp"
+        android:text="@string/getWrongButton"
+        app:layout_constraintBottom_toTopOf="@+id/postWrongButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtMsg"
+        app:layout_constraintVertical_bias="0.533" />
+
+    <Button
+        android:id="@+id/postWrongButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="150dp"
+        android:text="@string/postWrongButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
