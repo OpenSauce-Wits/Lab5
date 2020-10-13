@@ -32,8 +32,14 @@ public class ExampleInstrumentedTest {
     public ActivityTestRule<MainActivity> mainActivityActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
+    public void checkTextEmpty () {
+        onView(withId(R.id.txtMsg)).check(matches(withText("")));
+    }
+
+    @Test
     public void checkGetButton () throws InterruptedException {
 
+        Thread.sleep(500);
         onView(withId(R.id.getButton)).perform(click());
         Thread.sleep(1500);
         onView(withId(R.id.txtMsg)).check(matches(withText(R.string.getText)));
