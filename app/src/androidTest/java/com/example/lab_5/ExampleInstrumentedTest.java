@@ -34,7 +34,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void checkTextEmpty () {
-        onView(withId(R.id.txtMsg)).check(matches(withText(R.string.app_name)));
+        onView(withId(R.id.txtMsg)).check(matches(withText(R.string.getText)));
     }
 
     @Test
