@@ -14,6 +14,7 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -26,17 +27,19 @@ public class ExampleInstrumentedTest {
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void checkGetButton () {
+    public void checkGetButton () throws InterruptedException {
 
         onView(withId(R.id.getButton)).perform(click());
-        onView(withId(R.id.txtMsg)).check(matches(isDisplayed()));
+        Thread.sleep(1500);
+        onView(withId(R.id.txtMsg)).check(matches(withText("Hello from pravesh")));
     }
 
     @Test
-    public void checkPostButton () {
+    public void checkPostButton () throws InterruptedException {
 
         onView(withId(R.id.postButton)).perform(click());
-        onView(withId(R.id.txtMsg)).check(matches(isDisplayed()));
+        Thread.sleep(1500);
+        onView(withId(R.id.txtMsg)).check(matches(withText("Your username is pravesh")));
     }
 
 }

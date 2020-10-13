@@ -41,10 +41,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getRequest(){
-        Request request = new Request.Builder().url("http://lamp.ms.wits.ac.za/mc/test.php").build();
+        Request request = new Request.Builder().url("https://lamp.ms.wits.ac.za/mc/test.php").build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                txt.setText("Connection failed: " + e.getMessage());
                 e.printStackTrace();
             }
 
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
 
                             if (!response.isSuccessful()){
+                                txt.setText("Connection failed " + response);
                                 throw new IOException("Connection failed " + response);
                             }
                             else {
@@ -73,13 +75,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void postRequest(){
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("http://lamp.ms.wits.ac.za/mc/test2.php").newBuilder();
+        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/mc/test2.php").newBuilder();
         urlBuilder.addQueryParameter("username","pravesh");
         String url = urlBuilder.build().toString();
         Request request = new Request.Builder().url(url).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                txt.setText("Connection failed: " + e.getMessage());
                 e.printStackTrace();
             }
 
@@ -93,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
 
                             if (!response.isSuccessful()){
+                                txt.setText("Connection failed " + response);
                                 throw new IOException("Connection failed " + response);
                             }
                             else {
