@@ -1,20 +1,25 @@
 package com.example.lab_5;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import android.content.res.Resources;
+import android.view.View;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
+import org.hamcrest.Matcher;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withResourceName;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
+import static org.junit.Assert.*;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -24,14 +29,14 @@ import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentat
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
     @Rule
-    public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<MainActivity> mainActivityActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
     public void checkGetButton () throws InterruptedException {
 
         onView(withId(R.id.getButton)).perform(click());
         Thread.sleep(1500);
-        onView(withId(R.id.txtMsg)).check(matches(withText("Hello from pravesh")));
+        onView(withId(R.id.txtMsg)).check(matches(withText(R.string.getText)));
     }
 
     @Test
@@ -39,7 +44,7 @@ public class ExampleInstrumentedTest {
 
         onView(withId(R.id.postButton)).perform(click());
         Thread.sleep(1500);
-        onView(withId(R.id.txtMsg)).check(matches(withText("Your username is pravesh")));
+        onView(withId(R.id.txtMsg)).check(matches(withText(R.string.postText)));
     }
 
 }
